@@ -18,14 +18,19 @@ Or install it yourself as:
 
 ## Usage
 
-    detect = MobileDetect.new(user_agent, request.headers)
+    detect = MobileDetect.new(request.user_agent, request.headers)
 you can run that without second argument, but then gem cannot get device from client headers
 
     detect.tablet?
+    
 => true
+
     detect.mobile?
+    
 => false
+
     detect.device
+    
 => "iPad"
 
 ## Contributing
