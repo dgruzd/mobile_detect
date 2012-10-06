@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.version       = MobileDetect::VERSION
   gem.authors       = ["Dmitry Gruzd"]
   gem.email         = ["donotsendhere@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{ gem detect mobile device or not, tablet or mobile phone}
+  gem.summary       = %q{Mobile_Detect is a lightweight gem for detecting mobile devices. It uses the user-agent string combined with specific HTTP headers to detect the mobile environment.}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($/)
