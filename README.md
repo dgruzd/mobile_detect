@@ -1,6 +1,6 @@
 # MobileDetect
 
-Mobile_Detect is a lightweight gem for detecting mobile devices. It uses the user-agent string combined with specific HTTP headers to detect the mobile environment.
+mobile_detect is a lightweight gem for detecting mobile devices. It uses the user-agent string combined with specific HTTP headers to detect the mobile environment.
 
 ## Installation
 
