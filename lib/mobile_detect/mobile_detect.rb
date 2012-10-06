@@ -2,6 +2,33 @@ class MobileDetect
   attr_accessor :user_agent
 
 
+  # os, tablet and phone devices list is from php-mobile-detect
+  OperatingSystems = {
+        'AndroidOS'         => 'Android',
+        'BlackBerryOS'      => 'blackberry|rim tablet os',
+        'PalmOS'            => 'PalmOS|avantgo|blazer|elaine|hiptop|palm|plucker|xiino',
+        'SymbianOS'         => 'Symbian|SymbOS|Series60|Series40|SYB-[0-9]+|\bS60\b',
+        # @reference: http://en.wikipedia.org/wiki/Windows_Mobile
+        'WindowsMobileOS'   => 'Windows CE.*(PPC|Smartphone|Mobile|[0-9]{3}x[0-9]{3})|Window Mobile|Windows Phone [0-9.]+|WCE;',
+        # @reference: http://en.wikipedia.org/wiki/Windows_Phone
+        # http://wifeng.cn/?r=blog&a=view&id=106
+        # http://nicksnettravels.builttoroam.com/post/2011/01/10/Bogus-Windows-Phone-7-User-Agent-String.aspx
+        'WindowsPhoneOS'   => 'Windows Phone OS|XBLWP7|ZuneWP7',
+        'iOS'               => 'iphone|ipod|ipad',
+        'FlashLiteOS'       => '',
+        # http://en.wikipedia.org/wiki/MeeGo
+        # @todo: research MeeGo in UAs
+        'MeeGoOS'           => 'MeeGo',
+        # http://en.wikipedia.org/wiki/Maemo
+        # @todo: research Maemo in UAs
+        'MaemoOS'           => 'Maemo',
+        'JavaOS'            => 'J2ME/MIDP|Java/',
+        'webOS'             => 'webOS|hpwOS',
+        'badaOS'            => '\bBada\b',
+        'BREWOS'            => 'BREW'
+  }
+
+
   TabletDevices = {
       'BlackBerryTablet'  => 'PlayBook|RIM Tablet',
       'iPad'              => 'iPad|iPad.*Mobile',
@@ -75,7 +102,7 @@ class MobileDetect
   end
 
   def is_mobile_headers
-    return false if @req_headers.blank?
+    return false unless @req_headers
     if @req_headers['HTTP_X_WAP_PROFILE'] ||
         @req_headers['HTTP_WAP_CONNECTION'] ||
         @req_headers['HTTP_X_WAP_CLIENTID'] ||
