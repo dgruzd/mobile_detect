@@ -33,6 +33,10 @@ you can run that without second argument, but then gem cannot get device from cl
     
 => "iPad"
 
+    detect.os
+
+=> "iOS"
+
 ## Contributing
 
 1. Fork it
