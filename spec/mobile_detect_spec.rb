@@ -18,3 +18,16 @@ describe "Test ipad user_agent" do
     md.device.should eq 'iPad'
   end
 end
+
+
+
+describe "Test os detection" do
+  it 'ios test' do
+    md = MobileDetect.new('ipad mobile')
+    md.os.should == 'iOS'
+  end
+  it 'android test' do
+    md = MobileDetect.new('android tablet')
+    md.os.should == 'AndroidOS'
+  end
+end

@@ -15,7 +15,7 @@ class MobileDetect
         # http://nicksnettravels.builttoroam.com/post/2011/01/10/Bogus-Windows-Phone-7-User-Agent-String.aspx
         'WindowsPhoneOS'   => 'Windows Phone OS|XBLWP7|ZuneWP7',
         'iOS'               => 'iphone|ipod|ipad',
-        'FlashLiteOS'       => '',
+        #'FlashLiteOS'       => '',
         # http://en.wikipedia.org/wiki/MeeGo
         # @todo: research MeeGo in UAs
         'MeeGoOS'           => 'MeeGo',
@@ -66,6 +66,7 @@ class MobileDetect
     @device = nil
     @is_tablet = nil
     @is_mobile = nil
+    @os = nil
   end
 
   def tablet?
@@ -87,9 +88,17 @@ class MobileDetect
     @device
   end
 
+  def os
+    @os.nil? ? detect_os : @os
+  end
+
   private
   def is_tablet
     @is_tablet = regexp_device(TabletDevices)
+  end
+
+  def detect_os
+    @os = regexp_os(OperatingSystems)
   end
 
 
@@ -121,12 +130,31 @@ class MobileDetect
     end
   end
 
+  def regexp_os(reg_hash)
+    res = regexp(reg_hash)
+    if res
+      @os = res
+      return @os
+    else
+      return false
+    end
+  end
 
   def regexp_device(reg_hash)
+    res = regexp(reg_hash)
+    if res
+      @device = res 
+      return true
+    else
+      return false
+    end
+  end
+
+
+  def regexp(reg_hash)
     reg_hash.each do |key,value|
       if @user_agent =~ /#{value}/i
-        @device = key
-        return true
+        return key
       end
     end
     false
