@@ -1,5 +1,5 @@
 class MobileDetect
-  attr_accessor :device, :user_agent
+  attr_accessor :user_agent
 
 
   TabletDevices = {
@@ -53,6 +53,11 @@ class MobileDetect
     tablet = tablet?
     mobile = mobile?
     {:device => device, :user_agent => user_agent, :mobile => mobile, :tablet => tablet}
+  end
+
+  def device
+    tablet? || mobile?
+    @device
   end
 
   private
