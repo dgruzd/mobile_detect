@@ -1,6 +1,6 @@
 # MobileDetect
 
-TODO: Write a gem description
+Mobile_Detect is a lightweight gem for detecting mobile devices. It uses the user-agent string combined with specific HTTP headers to detect the mobile environment.
 
 ## Installation
 
@@ -18,7 +18,15 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    detect = MobileDetect::Detector.new(user_agent, request.headers)
+you can run that without second argument, but then gem cannot get device from client headers
+
+    detect.tablet?
+=> true
+    detect.mobile?
+=> false
+    detect.device
+=> "iPad"
 
 ## Contributing
 
