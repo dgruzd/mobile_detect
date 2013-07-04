@@ -59,14 +59,30 @@ class MobileDetect
 
   }
 
+  BotAgents = {
+    'Google' => 'Googlebot',
+    'Yahoo!' => 'Slurp|Yahoo! Slurp',
+    'AOL' => 'Slurp',
+    'MSN' => 'MSNBot',
+    'Live' => 'MNSBot',
+    'Ask' => 'Teoma',
+    'AltaVista' => 'Scooter',
+    'Alexa' => 'ia_archiver',
+    'Lycos' => 'Lycos',
+    'Yandex' => 'Yandex',
+    'Rambler' => 'StackRambler',
+    'Mail.ru' => 'Mail.ru',
+    'Aport' => 'Aport',
+    'Webalta' => 'WebAlta|WebAlta Crawler/2.0'
+  }
+
 
   def initialize(user_agent, req_headers = nil)
     @user_agent = user_agent
     @req_headers = req_headers
-    @device = nil
-    @is_tablet = nil
-    @is_mobile = nil
-    @os = nil
+
+    @is_tablet, @is_mobile = nil
+    @os, @device = nil
   end
 
   def tablet?
@@ -77,10 +93,15 @@ class MobileDetect
     @is_mobile.nil? ? is_mobile : @is_mobile
   end
 
+  def bot?
+    @is_bot.nil? ? is_bot : @is_bot
+  end
+
   def info
     tablet = tablet?
     mobile = mobile?
-    {:device => device, :user_agent => user_agent, :mobile => mobile, :tablet => tablet}
+    bot = bot?
+    {:device => device, :user_agent => user_agent, :mobile => mobile, :tablet => tablet, :bot => bot}
   end
 
   def device
@@ -92,15 +113,38 @@ class MobileDetect
     @os.nil? ? detect_os : @os
   end
 
+  def bot
+    @bot.nil? ? detect_bot : @bot
+  end
+
   private
   def is_tablet
     @is_tablet = regexp_device(TabletDevices)
   end
 
   def detect_os
-    @os = regexp_os(OperatingSystems)
+    res = regexp(OperatingSystems)
+    if res
+      @os = res
+      return @os
+    else
+      return false
+    end
   end
 
+  def detect_bot
+    res = regexp(BotAgents)
+    if res
+      @bot = res
+      return @bot
+    else
+      return false
+    end
+  end
+
+  def is_bot
+    @is_bot = detect_bot ? true : false
+  end
 
   def is_mobile
     @is_mobile = (is_mobile_headers || is_mobile_regexp)
@@ -125,16 +169,6 @@ class MobileDetect
         @req_headers['HTTP_UA_OS'] || # Reported by Windows Smartphones
         @req_headers['HTTP_UA_CPU'] && ['HTTP_UA_CPU'] == 'ARM' # Seen this on a HTC
       return true
-    else
-      return false
-    end
-  end
-
-  def regexp_os(reg_hash)
-    res = regexp(reg_hash)
-    if res
-      @os = res
-      return @os
     else
       return false
     end

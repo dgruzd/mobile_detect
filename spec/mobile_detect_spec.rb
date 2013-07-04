@@ -31,3 +31,15 @@ describe "Test os detection" do
     md.os.should == 'AndroidOS'
   end
 end
+
+
+describe "Test bot detection" do
+  it 'googlebot test' do
+    md = MobileDetect.new('Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)')
+    md.bot.should == 'Google'
+  end
+  it 'mail.ru test' do
+    md = MobileDetect.new('Mozilla/5.0 (compatible; Linux x86_64; Mail.RU_Bot/2.0; +http://go.mail.ru/help/robots)')
+    md.os.should == 'Mail.ru'
+  end
+end
