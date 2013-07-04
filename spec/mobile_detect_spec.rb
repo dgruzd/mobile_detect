@@ -40,6 +40,6 @@ describe "Test bot detection" do
   end
   it 'mail.ru test' do
     md = MobileDetect.new('Mozilla/5.0 (compatible; Linux x86_64; Mail.RU_Bot/2.0; +http://go.mail.ru/help/robots)')
-    md.os.should == 'Mail.ru'
+    md.bot.should == 'Mail.ru'
   end
 end
