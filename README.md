@@ -37,6 +37,8 @@ you can run that without second argument, but then gem cannot get device from cl
 
 => "iOS"
 
+### Bot detection
+
     detect.bot?
 
 => true
