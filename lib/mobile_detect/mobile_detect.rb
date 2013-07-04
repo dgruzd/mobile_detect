@@ -73,7 +73,8 @@ class MobileDetect
     'Rambler' => 'StackRambler',
     'Mail.ru' => 'Mail.ru',
     'Aport' => 'Aport',
-    'Webalta' => 'WebAlta|WebAlta Crawler/2.0'
+    'Webalta' => 'WebAlta|WebAlta Crawler/2.0',
+    'Facebook' => 'facebookexternalhit'
   }
 
 
