@@ -118,6 +118,12 @@ class MobileDetect
     @bot.nil? ? detect_bot : @bot
   end
 
+  def version
+    if os == 'AndroidOS'
+      /Android (\d+(?:\.\d+)+)/.match(user_agent)[1]
+    end
+  end
+
   private
   def is_tablet
     @is_tablet = regexp_device(TabletDevices)
