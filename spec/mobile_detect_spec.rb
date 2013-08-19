@@ -43,3 +43,14 @@ describe "Test bot detection" do
     md.bot.should == 'Mail.ru'
   end
 end
+
+describe "Test tablet detection" do
+  it 'test' do
+    md = MobileDetect.new('Mozilla/5.0 (Linux; U; Android 2.2-20111223; ru-ru; Inch OS Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1')
+    md.tablet?.should == true
+  end
+  it 'test 2' do
+    md = MobileDetect.new('(Linux; Android 4.0.4; ZTE V880E Build/IMM76D) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.169 Mobile Safari/537.22')
+    md.tablet?.should == true
+  end
+end

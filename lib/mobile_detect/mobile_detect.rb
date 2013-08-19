@@ -3,6 +3,7 @@ class MobileDetect
 
 
   # os, tablet and phone devices list is from php-mobile-detect
+  # https://github.com/serbanghita/Mobile-Detect
   OperatingSystems = {
         'AndroidOS'         => 'Android',
         'BlackBerryOS'      => 'blackberry|rim tablet os',
