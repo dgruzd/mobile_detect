@@ -195,6 +195,8 @@ class MobileDetect
 
     is_tablet || is_mobile
     is_bot
+    detect_os
+    detect_bot
   end
 
   def tablet?
@@ -210,23 +212,19 @@ class MobileDetect
   end
 
   def info
-    tablet = tablet?
-    mobile = mobile?
-    bot = bot?
-    {:device => device, :user_agent => user_agent, :mobile => mobile, :tablet => tablet, :bot => bot}
+    {:device => device, :user_agent => user_agent, :mobile => mobile?, :tablet => tablet?, :bot => bot}
   end
 
   def device
-    tablet? || mobile?
     @device
   end
 
   def os
-    @os.nil? ? detect_os : @os
+    @os
   end
 
   def bot
-    @bot.nil? ? detect_bot : @bot
+    @bot
   end
 
   def android_version
