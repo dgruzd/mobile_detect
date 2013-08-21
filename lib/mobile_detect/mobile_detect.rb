@@ -188,6 +188,9 @@ class MobileDetect
 
   def initialize(user_agent, req_headers = nil)
     @user_agent = user_agent
+    #@user_agent="Mozilla/5.0 (Linux; U; Android 2.2; en-us; GT-I9000 Build/FROYO) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
+    #@user_agent="Mozilla/5.0 (Linux; Android 4.0.4; ZTE V880E Build/IMM76D) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.169 Mobile Safari/537.22"
+    #@user_agent="Mozilla/5.0 (Linux; Android 4.1.2; GT-P3100 Build/JZO54K) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.169 Safari/537.22"
     @req_headers = req_headers
 
     @is_tablet, @is_mobile = false, false
@@ -233,7 +236,7 @@ class MobileDetect
 
   def version
     if os == 'AndroidOS'
-      /Android (\d+(?:\.\d+)+)/.match(user_agent)[1]
+      /Android (\d+(?:\.\d+)+)/.match(user_agent).try('[]',1)
     end
   end
 

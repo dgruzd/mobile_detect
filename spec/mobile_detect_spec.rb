@@ -45,7 +45,7 @@ describe "Test bot detection" do
 end
 
 describe "Test tablet detection" do
-  it 'test' do
+  it 'Test InchTablet' do
     md = MobileDetect.new('Mozilla/5.0 (Linux; U; Android 2.2-20111223; ru-ru; Inch OS Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1')
     md.tablet?.should == true
   end
